@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>OFMで出品しよう</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" 
+              href="{% static 'assets/favicon.ico' %}" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/buy.css' %}" rel="stylesheet" />  
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="headmove">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="/">OFM</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'shopapp:buy' %}">Display</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/">すべての商品</a></li>
+                                <div class="dropdown-display1" style="z-index: 1; display: flex;">
+                                    <div style="width: 50%;">
+                                        <li ><hr class="dropdown-divider" /></li>
+                                        <li style="color:e2e2e2; font-size: 15px; margin-left:15px; " >トップス</li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="/shop/shirts">シャツ</a></li>
+                                        <li><a class="dropdown-item" href="/shop/sweater">セーター</a></li>
+                                    </div>
+                                    <div style="width: 50%;">
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li style="color:e2e2e2; font-size: 15px; margin-left:15px; " >アウター</li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="/shop/jumper">ジャンパー</a></li>
+                                        <li><a class="dropdown-item" href="/shop/cardigan">カーディガン</a></li>
+                                    </div>
+                                </div>
+                                <div class="dropdown-display2" style="z-index: 2; display: flex;">
+                                    <div style="width: 50%;">
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li style="color:e2e2e2; font-size: 15px; margin-left:15px; " >ボトムス</li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="/shop/pants">ズボン</a></li>
+                                        <li><a class="dropdown-item" href="/shop/skirt">スカート</a></li>
+                                    </div>
+                                    <div style="width: 50%;">
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li style="color:e2e2e2; font-size: 15px; margin-left:15px; " >その他</li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="/shop/onepiece">ワンピース</a></li>
+                                        <li><a class="dropdown-item" href="/shop/sweats">スウェット</a></li>
+                                        <li><a class="dropdown-item" href="/shop/kids">子供服</a></li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <a href="{% url 'accounts:signup' %}" style="margin-right: 7px;">
+                            <button class="btn btn-outline-dark" type="button">
+                                会員登録
+                            </button>
+                        </a>
+                        <a href="{% url 'accounts:login' %}">
+                            <button class="btn btn-outline-dark" type="button">
+                                ログイン
+                            </button>
+                        </a>
+                        
+                    </form>
+                </div>
+            </div>
+        </nav>
+        {% block header %}
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">OFM-出品</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">不用品が誰かのもとへ</p>
+                </div>
+            </div>
+        </header>
+        {% endblock %}
+
+        <!-- フォームの開始 -->
+<form method="POST" enctype="multipart/form-data" action="{% url 'shopapp:buy' %}">
+    {% csrf_token %}
+    <div class="Form">
+        
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label">
+                <span class="Form-Item-Label-Required">必須</span>商品の画像1
+            </p>
+            <label class="Form-Item-Input" style="display: inline-block; width: 150px; text-align: center; background-color: #f1f2ec; color: #000000; padding: 10px; border-radius: 2px; cursor: pointer;">
+                画像を選択する
+                <input type="file" name="image1" accept="image/*" style="display: none;" onchange="document.getElementById('file-status1').textContent = '一枚目の画像: ' + this.files[0].name;">
+            </label> 
+        </div>
+        <p id="file-status1" style="font-size: 14px; color: green; margin-left: 288px;"></p>
+        
+        <div class="Form-Item">
+            <p class="Form-Item-Label">
+                <span class="Form-Item-Label-Required">任意</span>商品の画像2
+            </p>
+            <label class="Form-Item-Input" style="display: inline-block; width: 150px; text-align: center; background-color: #f1f2ec; color: #000000; padding: 10px; border-radius: 2px; cursor: pointer;">
+                画像を選択する
+                <input type="file" name="image2" accept="image/*" style="display: none;" onchange="document.getElementById('file-status2').textContent = '二枚目の画像: ' + this.files[0].name;">
+            </label>
+        </div>
+        <p id="file-status2" style="font-size: 14px; color: green; margin-left: 288px;"></p>
+        
+
+
+        <!-- 画像ファイル名表示 -->
+        <p id="file-status1" style="font-size: 14px; color: green; margin-left: 288px;"></p>
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>商品名</p>
+            <input type="text" class="Form-Item-Input" name="title" placeholder="" maxlength="20" required>
+        </div>
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>カテゴリー</p>
+            <select class="Form-Item-Input" name="category" required>
+                <option value="" disabled selected>選択してください</option>
+                {% for category in form.category.field.queryset %}
+                    <option value="{{ category.id }}">{{ category.title }}</option>  
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>商品の状態</p>
+            <select class="Form-Item-Input" name="condition" required>
+                <option value="" disabled selected>選択してください</option>
+                {% for condition in form.condition.field.queryset %}
+                    <option value="{{ condition.id }}">{{ condition.title }}</option>  
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>販売価格 </p>
+            <input type="number" class="Form-Item-Input" name="price" placeholder="￥0" required>
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>発送までの日数</p>
+            <select class="Form-Item-Input" name="day" required>
+                <option value="" disabled selected>選択してください</option>
+                {% for day in form.day.field.queryset %}
+                    <option value="{{ day.id }}">{{ day.title }}</option>  
+                {% endfor %}
+            </select>
+        </div>
+        <div class="Form-Item">
+            <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>発送元の都道府県</p>
+            <select class="Form-Item-Input" name="ken" required>
+                <option value="" disabled selected>選択してください</option>
+                {% for ken in form.ken.field.queryset %}
+                    <option value="{{ ken.id }}">{{ ken.title }}</option>  
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="Form-Item">
+            <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>商品の説明</p>
+            <textarea class="Form-Item-Textarea" name="comment" placeholder="色、定価、注意点、送料など" required></textarea>
+        </div>
+        <input type="submit" class="Form-Btn" value="出品" >
+    </div>
+</form>   
+        <footer class="py-5 bg-white">
+            <div class="container"><p class="m-2 text-center text-brown">    　</p></div>
+        </footer>
+     
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>

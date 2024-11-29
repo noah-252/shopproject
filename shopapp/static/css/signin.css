@@ -1,0 +1,85 @@
+/* ベーススタイル */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f1f2ec;
+    color: #212529;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* フォーム全体のスタイル */
+.form-signin {
+    width: 100%;
+    max-width: 360px;
+    padding: 15px;
+    margin: auto;
+
+    background-color: #f1f2ec;
+    border: 1px solid #f1f2ec;
+    border-radius: 8px;
+}
+
+/* タイトルのスタイル */
+.form-signin h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #131313;
+}
+
+/* 入力フィールド */
+.form-control {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: none;
+    box-shadow: #f1f2ec;
+}
+
+/* ログインボタン */
+.btn-primary {
+    background-color: #f1f2ec;
+    border-color: #000000;
+    padding: 10px;
+    font-size: 1rem;
+    color:#000000;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color:#f1f2ec;
+    border-color: #000000;
+    color:#212529;
+}
+
+/* パスワードリンク */
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* 画像のマージン調整 */
+.mb-4 {
+    margin-bottom: 20px;
+}
+
+/* エラーメッセージ */
+p[style='color: red'] {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}

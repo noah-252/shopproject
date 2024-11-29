@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+{% block title %}商品詳細{% endblock %}
+    {% block contents %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col offset-3">
+                <h2>{{ object.title }}</h2>
+                <p>{{ object.comment }}</p>
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'shopapp:shop_purchase' object.id %}">購入</a>
+                <p>{{ object.posted_at }}に投稿</p>
+                <div>
+                    <p><img style="width: 50vw;" src="{{ object.image1.url }}"></img></p>
+                    {% if object.image2 %}
+                        <p><img style="width: 50vw;" src="{{ object.image2.url }}"></img></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,53 @@
+{% load static %}
+{% block contents %}
+<!DOCTYPE html>
+<html lang='jp'>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for record in object_list %}
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="{{ record.image1.url }}"
+                    class="bd-placeholder-img card-img-top"
+                    width="100%" height="225"
+                    xmlns="https://www.w3.org/2000/svg"
+                    role="img" aria-label="Placeholder: Thumbnail"
+                    preserveAspectRatio="xMidYMid slice"
+                    focusable"false">
+                    <title>Placeholer</title>
+                    <rect width="100%" height="100%" fill="#55595c"/>
+                </img>
+                <div class="card-body">
+                    <p class="card-text">
+                        {{ record.title }}
+                    </p>
+                    <div class"d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <div>
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'shopapp:shop_detail' record.pk %}">view
+                                <a class="btn btn-sm btn-outline-secondary" style="margin-left: 5px;" href="{% url 'shopapp:shop_category' category=record.category.id %}">
+                                    {{ record.category.title }}
+                                </a>
+                                <a class="btn btn-sm btn-outline-secondary" href="{% url 'shopapp:purchase_confirm' record.pk %}">購入</a>
+                            </div>
+                                <!-- ブックマークボタンを追加 -->
+                            <form action="{% url 'shopapp:toggle_bookmark' product_id=record.pk %}" method="post">
+                                {% csrf_token %}
+                                {% if record in request.user.bookmarked_products.all %}
+                                <button class="btn btn-bookmark d-flex" type="submit" style="height: 30.34px;float: left;"><img src="{% static 'assets/B_ON.jpg'%}" alt="Button Image" style="height: 130%;width: 140%;margin:0 0 10 0;"></button>
+                                {% else %}
+                                <button class="btn btn-bookmark d-flex" type="submit" style="height: 30.34px;float: left;"><img src="{% static 'assets/B_OFF.jpg'%}" alt="Button Image" style="height: 130%;width: 140%;margin:0 0 10 0;"></button>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <a href="{% url 'shopapp:user_list' user=record.user.id %}"style='float: right;'><small class="text-muted">
+                            {{ record.user.username }}</small></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

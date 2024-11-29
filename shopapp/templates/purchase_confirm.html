@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+   <link href={% static 'css/confirm.css' %} rel="stylesheet">
+</head>
+
+{% block contents %}
+   <div>
+      <h1 class="display">購入確認</h1>
+      <p class="display">以下の商品を購入しますか？</p>
+      <div>
+         <h2 class="display1">{{ ShopPost.title }}</h2>
+         <p class="display2">{{ ShopPost.description }}</p>
+         <p class="display3">価格: {{ ShopPost.price }}円</p>
+      </div>
+      <form method="post">
+         {% csrf_token %}
+         <br>
+         <div  style="display: flex;">
+            <a class="btn btn-outline-secondary1" style="width: 10vw; margin-left: auto;" href="{% url 'shopapp:shop_purchase' ShopPost.pk%}">購入する</a>
+            <a class="btn btn-outline-secondary2" style="width: 10vw; margin-right: auto;" href="{% url 'shopapp:index' %}">キャンセル</a>
+         </div>
+      <br>
+      </form>
+   </div>
+{% endblock %}

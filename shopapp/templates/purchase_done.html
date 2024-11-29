@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <link href={% static 'css/style.css' %} rel="stylesheet">
+ </head>
+ {% block contents %}
+
+<h1 class="display4">購入完了</h1>
+<p class="display5">{{ message }}</p>
+<a class="display6" href="{% url 'shopapp:index' %}">トップページに戻る</a>
+<br></br>
+<br></br>
+{% endblock %}

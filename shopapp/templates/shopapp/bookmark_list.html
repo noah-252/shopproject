@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block contents %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <h2>ブックマーク一覧</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for product in bookmarked_products %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ product.image1.url }}" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                    <div class="card-body">
+                        <p class="card-text">{{ product.title }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'shopapp:shop_category' category=product.category.id %}" class="btn btn-sm btn-outline-secondary">{{ product.category.title }}</a>
+                            <form action="{% url 'shopapp:toggle_bookmark' product_id=product.pk %}" method="post">
+                                {% csrf_token %}
+                                {% if record in request.user.bookmarked_products.all %}
+                                <button type="submit">ブックマーク</button>
+                                {% else %}
+                                <button type="submit">ブックマーク解除</button>
+                                {% endif %}
+                            </form>
+                            <a href="{% url 'shopapp:shop_purchase' product.pk %}" class="btn btn-sm btn-outline-secondary">購入</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>ブックマークされた商品がありません。</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
